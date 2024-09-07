@@ -1,12 +1,10 @@
 from typing import List
 
 class Bottle:
-    def __init__(self, id: int):
+    def __init__(self, id: int, poisoned: bool = False):
         self.id = id
-        self.poisoned = False
+        self.poisoned = poisoned
     
-    def set_as_poisoned(self):
-        self.poisoned = True
     
 class TestStrip:
     days_to_results: int = 7
@@ -18,6 +16,7 @@ class TestStrip:
     def size_drops_for_day(self, day: int) -> int:
         while len(self.drops_by_day) <= day:
             self.drops_by_day.append([])
+        return len(self.drops_by_day)
     
     def has_poison(self, bottles: List[Bottle]) -> bool:
         for bottle in bottles:
@@ -40,7 +39,7 @@ class TestStrip:
                 return True
         return False
 
-def find_poisoned_bootle(bottles: List[Bottle], strips: List[TestStrip]) -> int:
+def find_poisoned_bottle(bottles: List[Bottle], strips: List[TestStrip]) -> int:
     run_tests(bottles, strips)
     positive = get_positive_on_day(strips, 7)
     return set_bits(positive)
@@ -68,3 +67,10 @@ def set_bits(positive: List[int]) -> int:
     for bit_index in positive:
         id |= 1 << bit_index
     return id
+
+
+
+bottles = [Bottle(id=i) for i in range(1000)]
+bottles[42].poisoned = True 
+strips = [TestStrip(id=i) for i in range(10)]
+print(find_poisoned_bottle(bottles, strips))
