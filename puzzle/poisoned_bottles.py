@@ -69,7 +69,7 @@ def set_bits(positive: List[int]) -> int:
     return id
 
 
-
+    
 bottles = [Bottle(id=i) for i in range(1000)]
 bottles[42].poisoned = True 
 strips = [TestStrip(id=i) for i in range(10)]
