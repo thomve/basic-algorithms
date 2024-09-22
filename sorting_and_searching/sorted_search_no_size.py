@@ -19,7 +19,7 @@ def binary_search(listy: List[int], value: int, low: int, high: int):
             return mid
     return -1
 
-listy = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, -1, -1, -1, -1]
+listy = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21]
 value_to_search = 15
 result = search(listy, value_to_search)
 print(f"Index of {value_to_search} in listy: {result}")
