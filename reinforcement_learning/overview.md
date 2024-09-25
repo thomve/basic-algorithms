@@ -8,9 +8,7 @@ These algorithms do not require a model of the environment and can be further cl
 - **Q-Learning**:
     - Off-policy algorithm that learns the value of actions for each state.
     - Equation: 
-        $$
-        Q(s, a) \leftarrow Q(s, a) + \alpha [r + \gamma \max_{a'} Q(s', a') - Q(s, a)]
-        $$
+        $$Q(s, a) \leftarrow Q(s, a) + \alpha [r + \gamma \max_{a'} Q(s', a') - Q(s, a)]$$
 - **SARSA (State-Action-Reward-State-Action)**:
     - On-policy algorithm that updates the Q-values based on the actions the agent actually takes.
     - Equation: 
@@ -50,9 +48,7 @@ These algorithms explicitly optimize the policy by adjusting parameters in the d
 - **Proximal Policy Optimization (PPO)**:
     - Ensures stable learning by limiting large policy updates using a clipped objective function.
     - Equation:
-        $$
-        L(\theta) = \min(r(\theta) \hat{A}, \text{clip}(r(\theta), 1 - \epsilon, 1 + \epsilon) \hat{A})
-        $$
+        $$L(\theta) = \min(r(\theta) \hat{A}, \text{clip}(r(\theta), 1 - \epsilon, 1 + \epsilon) \hat{A})$$
     
 - **Trust Region Policy Optimization (TRPO)**:
     - Limits how much the policy is allowed to change between updates by enforcing a trust region for stable learning.
