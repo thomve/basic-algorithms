@@ -12,9 +12,7 @@ These algorithms do not require a model of the environment and can be further cl
 - **SARSA (State-Action-Reward-State-Action)**:
     - On-policy algorithm that updates the Q-values based on the actions the agent actually takes.
     - Equation: 
-        $$
-        Q(s, a) \leftarrow Q(s, a) + \alpha [r + \gamma Q(s', a') - Q(s, a)]
-        $$
+        $$Q(s, a) \leftarrow Q(s, a) + \alpha [r + \gamma Q(s', a') - Q(s, a)]$$
 - **Deep Q-Networks (DQN)**:
     - Extension of Q-learning using deep neural networks to approximate Q-values in high-dimensional spaces.
 
@@ -22,9 +20,7 @@ These algorithms do not require a model of the environment and can be further cl
 - **REINFORCE**:
     - Monte Carlo policy gradient algorithm that directly updates the policy based on the gradient of expected rewards.
     - Equation:
-        $$
-        \theta \leftarrow \theta + \alpha \nabla_\theta \log \pi_\theta(a|s) R
-        $$
+        $$\theta \leftarrow \theta + \alpha \nabla_\theta \log \pi_\theta(a|s) R$$
 - **Actor-Critic Methods**:
     - Combines policy-based (actor) and value-based (critic) approaches. The actor updates the policy, and the critic evaluates the policy.
     - Example: **Advantage Actor-Critic (A2C)**, **Asynchronous Advantage Actor-Critic (A3C)**.
