@@ -103,3 +103,28 @@ def intersection(start1: Point, end1: Point, start2: Point, end2: Point):
 intersection_point = intersection(Point(0, 0), Point(1, 1), Point(0, 1), Point(1, 0))
 
 print(intersection_point.x, intersection_point.y) # 0.5, 0.5
+
+"""
+Exercice 3: smallest difference
+"""
+print("Exercice 3: Smallest Difference")
+
+def find_smallest_difference(array1: List[int], array2: List[int]):
+    if array1 is None or array2 is None or len(array1) == 0 or len(array2) == 0:
+        return -1
+    array1.sort()
+    array2.sort()
+    i = 0
+    j = 0
+    smallest_difference = float('inf')
+    while i < len(array1) and j < len(array2):
+        difference = abs(array1[i] - array2[j])
+        if difference < smallest_difference:
+            smallest_difference = difference
+        if array1[i] < array2[j]:
+            i += 1
+        else:
+            j += 1
+    return smallest_difference
+
+print(find_smallest_difference([1, 3, 15, 11, 2], [23, 127, 235, 19, 8])) # 3
