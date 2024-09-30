@@ -153,3 +153,26 @@ def get_max(a: int, b: int):
 
 print(get_max(15, 20)) # 20
 
+"""
+Exercice 5: Diving board
+"""
+print("Exercice 5: Diving Board")
+
+def get_all_lengths(k: int, shorter: int, longer: int):
+    lengths: set = set()
+    visited: set = set()
+    get_all_lengths_helper(k, 0, shorter, longer, lengths, visited)
+    return lengths
+
+def get_all_lengths_helper(k: int, total: int, shorter: int, longer: int, lengths: set, visited: set):
+    if k == 0:
+        lengths.add(total)
+        return
+    key: str = str(k) + " " + str(total)
+    if key in visited:
+        return
+    get_all_lengths_helper(k - 1, total + shorter, shorter, longer, lengths, visited)
+    get_all_lengths_helper(k - 1, total + longer, shorter, longer, lengths, visited)
+    visited.add(key)
+
+print(get_all_lengths(3, 2, 3)) # {6, 7, 8, 9}-
