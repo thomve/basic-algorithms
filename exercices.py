@@ -128,3 +128,28 @@ def find_smallest_difference(array1: List[int], array2: List[int]):
     return smallest_difference
 
 print(find_smallest_difference([1, 3, 15, 11, 2], [23, 127, 235, 19, 8])) # 3
+
+
+"""
+Exercice 4: get max
+"""
+print("Exercice 4: Get Max")
+def flip(bit: int):
+    return 1 ^ bit
+
+def sign(a: int):
+    return flip((a >> 31) & 0x1)
+
+def get_max(a: int, b: int):
+    c: int = a - b
+    sa: int = sign(a)
+    sb: int = sign(b)
+    sc: int = sign(c)
+    use_sign_of_a: int = sa ^ sb
+    use_sign_of_c: int = flip(sa ^ sb)
+    k = use_sign_of_a * sa + use_sign_of_c * sc
+    q = flip(k)
+    return a * k + b * q
+
+print(get_max(15, 20)) # 20
+
