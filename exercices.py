@@ -176,3 +176,53 @@ def get_all_lengths_helper(k: int, total: int, shorter: int, longer: int, length
     visited.add(key)
 
 print(get_all_lengths(3, 2, 3)) # {6, 7, 8, 9}-
+
+
+"""
+Exeruce 6: master mind
+"""
+print("Exercice 6: Master Mind")
+
+class Result:
+    def __init__(self):
+        self.hits = 0
+        self.pseudo_hits = 0
+
+    def to_string(self):
+        return "Hits: " + str(self.hits) + ", Pseudo Hits: " + str(self.pseudo_hits)
+    
+
+def code_helper(char: str):
+    if char == 'B':
+        return 0
+    if char == 'G':
+        return 1
+    if char == 'R':
+        return 2
+    if char == 'Y':
+        return 3
+    return -1
+
+MAX_COLORS = 4
+
+def estimate(guess: str, solution: str):
+    if len(guess) != len(solution):
+        return None
+
+    result = Result()
+    frequencies = [0] * MAX_COLORS
+    for i in range(len(guess)):
+        if guess[i] == solution[i]:
+            result.hits += 1
+        else:
+            code = code_helper(guess[i])
+            frequencies[code] += 1
+
+    for i in range(len(guess)):
+        code = code_helper(guess[i])
+        if code >= 0 and frequencies[code] > 0 and guess[i] != solution[i]:
+            result.pseudo_hits += 1
+            frequencies[code] -= 1
+    return result
+
+print(estimate("GGRR", "RGBY").to_string())
