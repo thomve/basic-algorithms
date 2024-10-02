@@ -226,3 +226,51 @@ def estimate(guess: str, solution: str):
     return result
 
 print(estimate("GGRR", "RGBY").to_string())
+
+
+"""
+Exercice 7: Pattern matching
+"""
+print("Exercice 7: Pattern Matching")
+
+def does_match(pattern: str, value: str):
+    if len(pattern) == 0:
+        return len(value) == 0
+    main_char = pattern[0]
+    alt_char = 'B' if main_char == 'A' else 'A'
+    size = len(value)
+    count_main = count_of(pattern, main_char)
+    count_alt = len(pattern) - count_main
+    first_alt = pattern.find(alt_char)
+    max_main_size = size // count_main
+    for main_size in range(max_main_size):
+        remaining_length = size - main_size * count_main
+        first: str = value[:main_size]
+        if count_alt == 0 or remaining_length % count_alt == 0:
+            alt_index = first_alt * main_size
+            alt_size = 0 if count_alt == 0 else remaining_length // count_alt
+            second = "" if count_alt == 0 else value[alt_index: alt_index + alt_size]
+            candidate = build_from_pattern(pattern, first, second)
+            if candidate == value:
+                return True
+    return False
+            
+def build_from_pattern(pattern: str, main: str, alt: str):
+    main_char = pattern[0]
+    result = ""
+    for c in pattern:
+        if c == main_char:
+            result += main
+        else:
+            result += alt
+    return result
+
+def count_of(pattern: str, c: str):
+    count: int = 0
+    for i in range(len(pattern)):
+        if pattern[i] == c:
+            count += 1
+    return count
+
+print(does_match("ABBA", "catdogdogcat")) # True
+print(does_match("ABAB", "catdogdogcat")) # True
