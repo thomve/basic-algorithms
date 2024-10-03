@@ -274,3 +274,36 @@ def count_of(pattern: str, c: str):
 
 print(does_match("ABBA", "catdogdogcat")) # True
 print(does_match("ABAB", "catdogdogcat")) # True
+
+
+"""
+Exercice 8: Sum swap
+"""
+print("Exercice 8: Sum Swap")
+def find_swap_values(array1: List[int], array2: List[int]):
+    target: int = get_target(array1, array2)
+    if target is None:
+        return None
+    return find_difference(array1, array2, target)
+
+def get_target(array1: List[int], array2: List[int]):
+    sum1: int = sum(array1)
+    sum2: int = sum(array2)
+    if (sum1 - sum2) % 2 != 0:
+        return None
+    return (sum1 - sum2) // 2
+
+def find_difference(array1: List[int], array2: List[int], target: int):
+    contents2 = get_content(array2)
+    for one in array1:
+        two = one - target
+        if two in contents2:
+            return one, two
+
+def get_content(array: List[int]):
+    seta = set()
+    for a in array:
+        seta.add(a)
+    return seta
+
+print(find_swap_values([4, 1, 2, 1, 1, 2], [3, 6, 3, 3]))
