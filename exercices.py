@@ -307,3 +307,17 @@ def get_content(array: List[int]):
     return seta
 
 print(find_swap_values([4, 1, 2, 1, 1, 2], [3, 6, 3, 3]))
+
+
+"""
+Exercice 9: add without plus
+"""
+print("Exercice 9: Add without plus")
+def add(a: int, b: int):
+    if b == 0:
+        return a
+    sum = a ^ b
+    carry = (a & b) << 1
+    return add(sum, carry)
+
+print(add(5, 3)) # 8
