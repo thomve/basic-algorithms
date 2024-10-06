@@ -339,3 +339,22 @@ def shuffle(cards: List[int], i: int):
     return cards
 
 print(shuffle([1, 2, 3, 4, 5], 4))
+
+"""
+Exercice 11: Random set
+"""
+print("Exercice 11: Random Set")
+
+def random_set(original: List[int], m: int, i: int):
+    if i+1 < m:
+        return None
+    elif i+1 == m:
+        return original[:m]
+    else:
+        _set = random_set(original, m, i-1)
+        rand = randint(0, i)
+        if rand < m:
+            _set[rand] = original[i]
+        return _set
+
+print(random_set([1, 2, 3, 4, 5], 3, 4))
