@@ -321,3 +321,21 @@ def add(a: int, b: int):
     return add(sum, carry)
 
 print(add(5, 3)) # 8
+
+"""
+Exercice 10: shuffle
+"""
+from random import randint
+print("Exercice 10: Shuffle")
+def shuffle(cards: List[int], i: int):
+    if i == 0:
+        return cards
+    shuffle(cards, i - 1)
+    k = randint(0, i)
+    temp  = cards[k]
+    cards[k] = cards[i]
+    cards[i] = temp
+
+    return cards
+
+print(shuffle([1, 2, 3, 4, 5], 4))
