@@ -358,3 +358,48 @@ def random_set(original: List[int], m: int, i: int):
         return _set
 
 print(random_set([1, 2, 3, 4, 5], 3, 4))
+
+"""
+Exercice 12: Letters & numbers
+"""
+print("Exercice 12: Letters & Numbers")
+
+def compute_delta_arrays(array: List[str]):
+    deltas = []
+    delta = 0
+    print("arra", array)
+    for i in range(len(array)):
+        if array[i].isdigit():
+            delta -= 1
+        else:
+            delta += 1
+        deltas.append(delta)
+    return deltas
+
+def find_longest_match(deltas: List[str]):
+    map = {0: -1}
+    max = [0, 0]
+    for i in range(len(deltas)):
+        if not deltas[i] in map:
+            map[deltas[i]] = i
+        else:
+            match = map[deltas[i]]
+            distance = i - match
+            longest = max[1] - max[0]
+            if distance > longest:
+                max = [match, i]
+    return max
+
+def extract(array: List[str], start: int, end: int):
+    sub_array = [0] * (end - start)
+    for i in range(start, end):
+        sub_array[i - start] = array[i]
+    return sub_array
+
+def find_longest_subarray(array: List[str]):
+    deltas = compute_delta_arrays(array)
+    match = find_longest_match(deltas)
+    return extract(array, match[0] + 1, match[1])
+
+
+print(find_longest_subarray(["a", "1", "2", "b", "c", "d", "e", "f", "5", "6", "7", "g"]))
