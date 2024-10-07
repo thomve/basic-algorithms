@@ -367,7 +367,6 @@ print("Exercice 12: Letters & Numbers")
 def compute_delta_arrays(array: List[str]):
     deltas = []
     delta = 0
-    print("arra", array)
     for i in range(len(array)):
         if array[i].isdigit():
             delta -= 1
@@ -403,3 +402,33 @@ def find_longest_subarray(array: List[str]):
 
 
 print(find_longest_subarray(["a", "1", "2", "b", "c", "d", "e", "f", "5", "6", "7", "g"]))
+
+"""
+Exercice 13: Majority element
+"""
+print("Exercice 13: Majority Element")
+
+def get_candidate(array: List[int]):
+    majority = 0
+    count = 0
+    for n in array:
+        if count == 0:
+            majority = n
+        if n == majority:
+            count += 1
+        else:
+            count -= 1
+    return majority
+
+def validate(array: List[int], majority: int):
+    count = 0
+    for n in array:
+        if n == majority:
+            count += 1
+    return count > len(array) // 2
+
+def get_majority_element(array: List[int]):
+    candidate = get_candidate(array)
+    return candidate if validate(array, candidate) else None
+
+print(get_majority_element([1, 2, 5, 9, 5, 9, 5, 5, 5])) # 5
