@@ -1,5 +1,5 @@
 from typing import List
-
+import heapq
 
 """
 word frequencies: design a method to find the frequency of occurrences of any given word in a book. What if we were running this algorithm multiple times?
@@ -432,3 +432,28 @@ def get_majority_element(array: List[int]):
     return candidate if validate(array, candidate) else None
 
 print(get_majority_element([1, 2, 5, 9, 5, 9, 5, 5, 5])) # 5
+
+
+"""
+Exercice 14: Smallest K
+"""
+print("Exercice 14: Smallest K")
+
+def find_smallest_k(arr, k):
+    if k >= len(arr):
+        return sorted(arr)
+
+    max_heap = [-arr[i] for i in range(k)]
+    heapq.heapify(max_heap)
+
+    for i in range(k, len(arr)):
+        if -arr[i] > max_heap[0]:
+            heapq.heappop(max_heap)
+            heapq.heappush(max_heap, -arr[i])
+
+    smallest_k = [-heapq.heappop(max_heap) for _ in range(len(max_heap))]
+
+    return smallest_k[::-1]
+    
+
+print(find_smallest_k([10, 2, 3, 13, 6, 7, 8, 9], 5))
