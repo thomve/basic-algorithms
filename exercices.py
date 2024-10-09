@@ -457,3 +457,23 @@ def find_smallest_k(arr, k):
     
 
 print(find_smallest_k([10, 2, 3, 13, 6, 7, 8, 9], 5))
+
+"""
+Exercice 15: The Masseuse
+"""
+print("Exercice 15: The Masseuse")
+
+def max_minutes(massages: List[int]):
+    memo = [-1] * len(massages)
+    return max_minutes_helper(massages, 0, memo)
+
+def max_minutes_helper(massages: List[int], index: int, memo: List[int]):
+    if index >= len(massages):
+        return 0
+    if memo[index] == -1:
+        best_with = massages[index] + max_minutes_helper(massages, index + 2, memo)
+        best_without = max_minutes_helper(massages, index + 1, memo)
+        memo[index] = max(best_with, best_without)
+    return memo[index]
+
+print(max_minutes([30, 15, 60, 75, 45, 15, 15, 45])) # 180
