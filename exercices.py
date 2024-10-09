@@ -477,3 +477,26 @@ def max_minutes_helper(massages: List[int], index: int, memo: List[int]):
     return memo[index]
 
 print(max_minutes([30, 15, 60, 75, 45, 15, 15, 45])) # 180
+
+
+"""
+Exercice 16: Volume of histogram
+"""
+print("Exercice 16: Volume of histogram")
+
+def compute_volume(histogram: List[int]):
+    left_maxes = [0] * len(histogram)
+    left_max = 0
+    for i in range(len(histogram)):
+        left_max = max(left_max, histogram[i])
+        left_maxes[i] = left_max
+    sum = 0
+    right_max = 0
+    for i in range(len(histogram) - 1, -1, -1):
+        right_max = max(right_max, histogram[i])
+        second_tallest = min(right_max, left_maxes[i])
+        if second_tallest > histogram[i]:
+            sum += second_tallest - histogram[i]
+    return sum
+
+print(compute_volume([0, 0, 4, 0, 0, 6, 0, 0, 3, 0, 5, 0, 1, 0, 0, 0])) # 26
