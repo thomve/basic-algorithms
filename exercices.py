@@ -500,3 +500,46 @@ def compute_volume(histogram: List[int]):
     return sum
 
 print(compute_volume([0, 0, 4, 0, 0, 6, 0, 0, 3, 0, 5, 0, 1, 0, 0, 0])) # 26
+
+"""
+Exercice 17: Max submatrix
+"""
+print("Exercice 17: Max submatrix")
+
+class SubMatrix:
+    def __init__(self, r1: int, r2: int, c1: int, c2: int, sum: int):
+        self.r1 = r1
+        self.r2 = r2
+        self.c1 = c1
+        self.c2 = c2
+        self.sum = sum
+
+def getMaxMatrix(matrix: List[List[int]]):
+    rowCount = len(matrix)
+    colCount = len(matrix[0])
+    best = None
+    for rowStart in range(rowCount):
+        partialSum = [0] * colCount
+        for rowEnd in range(rowStart, rowCount):
+            for i in range(colCount):
+                partialSum[i] += matrix[rowEnd][i]
+            best = max_sum_subarray(partialSum, best, rowStart, rowEnd)
+    return best
+
+def max_sum_subarray(partialSum: List[int], best: SubMatrix, rowStart: int, rowEnd: int):
+    colCount = len(partialSum)
+    sum = 0
+    start = 0
+    best_sub = None
+    for i in range(colCount):
+        sum += partialSum[i]
+        if sum < 0:
+            sum = 0
+            start = i + 1
+        elif best_sub is None or sum > best_sub.sum:
+            best_sub = SubMatrix(rowStart, rowEnd, start, i, sum)
+    if best is None or best_sub.sum > best.sum:
+        return best_sub
+    return best
+
+print(getMaxMatrix([[9, -8, 1, 3, -2], [-3, 7, 6, -2, 4], [6, -4, -4, 8, -7]]).sum) # 19
