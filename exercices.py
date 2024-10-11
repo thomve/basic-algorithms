@@ -543,3 +543,64 @@ def max_sum_subarray(partialSum: List[int], best: SubMatrix, rowStart: int, rowE
     return best
 
 print(getMaxMatrix([[9, -8, 1, 3, -2], [-3, 7, 6, -2, 4], [6, -4, -4, 8, -7]]).sum) # 19
+
+
+"""
+Exercice 18: sparse similarity
+"""
+print("Exercice 18: Sparse Similarity")
+
+class Docpair:
+    def __init__(self, doc1: int, doc2: int):
+        self.doc1 = doc1
+        self.doc2 = doc2
+
+class Document:
+    def __init__(self, id: int, words: set):
+        self.id = id
+        self.words = words
+
+def compute_similarity(documents: dict):
+    word_to_docs = group_words(documents)
+    similarities = compute_intersections(word_to_docs)
+    adjust_similarities(documents, similarities)
+    return similarities
+
+def group_words(documents: dict):
+    word_to_docs = {}
+    for id, doc in documents.items():
+        for word in doc.words:
+            if word not in word_to_docs:
+                word_to_docs[word] = []
+            word_to_docs[word].append(id)
+    return word_to_docs
+
+def compute_intersections(word_to_docs):
+    similarities = {}
+    for word in word_to_docs:
+        docs = word_to_docs[word]
+        for i in range(len(docs)):
+            for j in range(i + 1, len(docs)):
+                increment(similarities, docs[i], docs[j])
+    return similarities
+
+def increment(similarities, doc1, doc2):
+    pair = tuple(sorted((doc1, doc2)))
+    if pair not in similarities:
+        similarities[pair] = 0
+    similarities[pair] += 1
+
+def adjust_similarities(documents, similarities):
+    for pair, intersection in similarities.items():
+        doc1 = documents[pair[0]]
+        doc2 = documents[pair[1]]
+        union = len(doc1.words) + len(doc2.words) - intersection
+        similarities[pair] = intersection / union
+
+doc1 = Document(13, set([14, 15, 100, 9, 3]))
+doc2 = Document(16, set([32, 1, 9, 3, 5]))
+doc3 = Document(19, set([15, 29, 2, 6, 8, 7]))
+doc4 = Document(24, set([7, 10]))
+
+print(compute_similarity({13: doc1, 16: doc2, 19: doc3, 24: doc4}))
+
