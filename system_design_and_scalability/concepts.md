@@ -24,7 +24,16 @@ Joins operation in relational database does not scale well. To mitigate this:
 
 ## Caching
 
-* In-memory cache is a simple key-value pairing and typically sits between the application layer
+### In-memory caching 
+
+* a simple key-value pairing and typically sits between the application layer
+* stores data in the system's main memory (RAM)
+* Example Technologies: Redis, Memcached
+
+### Distributed caching
+
+* involves caching data across multiple nodes or servers in a network
+* Ideal for applications with high scalability and fault tolerance requirements, such as large-scale web applications and microservices architectures
 
 ## Asynchronous processing & queues
 
