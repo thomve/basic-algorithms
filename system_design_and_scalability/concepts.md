@@ -50,3 +50,38 @@ Joins operation in relational database does not scale well. To mitigate this:
 
 * map takes in some data and emits a key-value pair
 * reduce takes a key and a set of associated values and reduces them in some way, emitting a new key-value
+
+Here below an example of a map-reduce pseudocode:
+
+```
+// Map function (executed on each data chunk)
+function Map(key, value):
+    // key: document name or line number
+    // value: text content of the document or line
+    
+    // Split value into words
+    words = split(value)
+    
+    // Emit each word with a count of 1
+    for each word in words:
+        Emit(word, 1)  // Output key-value pair (word, 1)
+
+// Intermediate output after Map stage and before Reduce stage
+// Example: (word1, [1, 1, 1]), (word2, [1, 1]), ...
+
+// Reduce function (executed on each group of intermediate data)
+function Reduce(key, values):
+    // key: word
+    // values: list of counts for this word (e.g., [1, 1, 1])
+    
+    // Sum all values to get the total count for this word
+    total = 0
+    for each count in values:
+        total = total + count
+    
+    // Emit the word and its total count
+    Emit(key, total)  // Output key-value pair (word, total)
+
+// Final output example
+// (word1, 3), (word2, 2), ...
+```
