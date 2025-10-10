@@ -9,7 +9,7 @@ def maximum_rectangle(matrix: List[List[str]]):
     if not matrix or not matrix[0]:
         return 0
 
-    rows, cols = len(matrix), len(matrix[0])
+    cols = len(matrix[0])
     heights = [0] * cols
     max_area = 0
 
