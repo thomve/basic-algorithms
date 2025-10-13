@@ -1,4 +1,4 @@
-def isScramble(self, s1: str, s2: str) -> bool:
+def is_scramble(s1: str, s2: str) -> bool:
     if len(s1) != len(s2):
         return False
     if s1 == s2:
